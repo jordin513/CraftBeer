@@ -1,17 +1,19 @@
 package com.nidroj.craftbeer.api
 
-import com.nidroj.craftbeer.data.model.BeersResponse
+import com.nidroj.craftbeer.data.model.Beer
 import okhttp3.OkHttpClient
-import retrofit2.Response
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Query
 import timber.log.Timber
 
 interface PunkApi {
 
     companion object {
         private const val BASE_URL = "https://api.punkapi.com/v2/"
+        private const val MAX_PER_PAGE = 80
 
         @Volatile
         private var INSTANCE: PunkApi? = null
@@ -26,7 +28,13 @@ interface PunkApi {
 
                 INSTANCE = Retrofit.Builder()
                     .baseUrl(BASE_URL)
-                    .client(OkHttpClient())
+                    .client(OkHttpClient().newBuilder()
+                        .addInterceptor(
+                            HttpLoggingInterceptor().setLevel(
+                                HttpLoggingInterceptor.Level.BASIC
+                            )
+                        ).build()
+                    )
                     .addConverterFactory(GsonConverterFactory.create())
                     .build().create(PunkApi::class.java)
 
@@ -36,6 +44,9 @@ interface PunkApi {
         }
     }
 
-    @GET("beers")
-    suspend fun getBeers(): Response<BeersResponse>//todo pagination (empty if no beers), logging?
+    @GET("beers/")
+    suspend fun getBeers(
+        @Query("page") page: Int,
+        @Query("per_page") perPage: Int = MAX_PER_PAGE
+    ): List<Beer>
 }
