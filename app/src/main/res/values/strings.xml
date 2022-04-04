@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">CraftBeer</string>
+    <string name="abv">ABV</string>
 </resources>
