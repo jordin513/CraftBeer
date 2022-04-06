@@ -35,6 +35,9 @@ object ImageUtil {
                         return true
                     }
                 }).submit()
+        }else{
+            view.setImageResource(R.drawable.ic_beer)
+
         }
     }
 }
