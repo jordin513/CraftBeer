@@ -17,15 +17,32 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/network"
+        fontPath="carbon/Roboto-Bold.ttf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/no_network_connection_please_try_again"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="?android:attr/textColorPrimaryInverse"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingPrefix"
+        tools:visibility="visible" />
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:scrollbarThumbVertical="@color/primary"
+        android:scrollbars="vertical"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:scrollbars="vertical"
-        android:scrollbarThumbVertical="@color/primary"
         app:spanCount="2"
         tools:itemCount="12"
         tools:listitem="@layout/item_beer" />

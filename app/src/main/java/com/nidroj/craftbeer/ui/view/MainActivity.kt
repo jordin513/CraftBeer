@@ -41,6 +41,11 @@ class MainActivity : AppCompatActivity(), OnBeerClickListener {
                     }
 
                     Timber.e(error?.error)
+                    if (it.itemCount == 0) {
+                        binding.network.visibility = View.VISIBLE
+                    } else {
+                        binding.network.visibility = View.GONE
+                    }
 
                 }
             }
