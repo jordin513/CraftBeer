@@ -1,10 +1,7 @@
 package com.nidroj.craftbeer.ui.view
 
 import android.os.Bundle
-import android.transition.Explode
 import android.view.View
-import android.view.Window
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
@@ -24,7 +21,6 @@ class MainActivity : AppCompatActivity(), OnBeerClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -35,6 +31,8 @@ class MainActivity : AppCompatActivity(), OnBeerClickListener {
                     binding.progressBar.visibility = View.VISIBLE
                 } else {
                     binding.progressBar.visibility = View.GONE
+
+                    //if there is an error at any state then log the error
                     val error = when {
                         loadState.prepend is LoadState.Error -> loadState.prepend as LoadState.Error
                         loadState.append is LoadState.Error -> loadState.append as LoadState.Error
@@ -50,6 +48,7 @@ class MainActivity : AppCompatActivity(), OnBeerClickListener {
         }
 
         lifecycleScope.launch {
+            //updates adapter with beer data
             beerViewModel.getBeers().collectLatest {
                 adapter.submitData(it)
             }
@@ -57,8 +56,8 @@ class MainActivity : AppCompatActivity(), OnBeerClickListener {
 
     }
 
-
+    //handles when an item in the recycler view is clicked
     override fun onItemClicked(v: View?, beer: Beer, position: Int) {
-        //TODO open mor info about beer
-       }
+        BeerInfoBottomSheet(beer).show(supportFragmentManager, BeerInfoBottomSheet.TAG)
+    }
 }

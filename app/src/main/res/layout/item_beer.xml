@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    android:foreground="?android:attr/selectableItemBackground"
     app:cardCornerRadius="28dp"
     app:cardElevation="2dp">
 
@@ -41,6 +40,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
+                android:layout_marginStart="4dp"
                 android:maxLines="1"
                 android:text="@string/abv"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
@@ -59,7 +59,7 @@
             tools:ignore="ContentDescription" />
 
         <TextView
-            android:id="@+id/title"
+            android:id="@+id/beer_name"
             fontPath="carbon/Roboto-Bold.ttf"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

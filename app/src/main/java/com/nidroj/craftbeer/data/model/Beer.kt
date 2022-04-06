@@ -1,12 +1,9 @@
 package com.nidroj.craftbeer.data.model
 
-import androidx.room.Entity
-
 /**
  * Beer object returned from PunkAPI
  */
-@Entity(tableName = "beer")
-data class Beer (
+data class Beer(
     var id: Int = 0,
     var name: String? = null,
     var tagline: String? = null,

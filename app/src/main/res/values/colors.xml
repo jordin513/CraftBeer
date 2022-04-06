@@ -6,4 +6,5 @@
     <color name="primary_variant">#528788</color>
     <color name="secondary">#ECCC91</color>
     <color name="gray_dark">#424242</color>
+    <color name="bg_sheet">#F5DBAB</color>
 </resources>
