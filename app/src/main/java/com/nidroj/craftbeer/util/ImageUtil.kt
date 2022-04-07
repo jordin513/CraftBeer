@@ -8,6 +8,7 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.nidroj.craftbeer.R
+import timber.log.Timber
 
 object ImageUtil {
     fun loadImage(view: ImageView, url: String?) {
@@ -21,8 +22,12 @@ object ImageUtil {
                         resource: Bitmap?, model: Any?, target: Target<Bitmap>?,
                         dataSource: DataSource?, isFirstResource: Boolean
                     ): Boolean {
-                        resource?.let { res ->
-                            view.setImageBitmap(res)
+                        try {
+                            resource?.let { res ->
+                                view.setImageBitmap(res)
+                            }
+                        } catch (e: Exception) {
+                            Timber.e("Unable to set image: $e")
                         }
                         return true
                     }
@@ -35,7 +40,7 @@ object ImageUtil {
                         return true
                     }
                 }).submit()
-        }else{
+        } else {
             view.setImageResource(R.drawable.ic_beer)
 
         }

@@ -63,6 +63,11 @@ class MainActivity : AppCompatActivity(), OnBeerClickListener {
 
     //handles when an item in the recycler view is clicked
     override fun onItemClicked(v: View?, beer: Beer, position: Int) {
-        BeerInfoBottomSheet(beer).show(supportFragmentManager, BeerInfoBottomSheet.TAG)
+        try {
+            BeerInfoBottomSheet(beer).show(supportFragmentManager, BeerInfoBottomSheet.TAG)
+        } catch (e: Exception) {
+            Timber.e("Unable to open details sheet: $e")
+        }
+
     }
 }
